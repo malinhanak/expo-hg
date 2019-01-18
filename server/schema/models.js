@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 class User {
   constructor() {
@@ -12,4 +12,4 @@ class User {
   }
 }
 
-module.exports = new User()
+export default new User()

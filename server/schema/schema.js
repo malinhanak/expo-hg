@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
-// const User = require('./models');
+import userModel  from './models';
 
-const typeDefs = gql`
+export const typeDefs = gql`
   type User {
     id: ID
     name: String
@@ -11,19 +11,14 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: String #[User]
+    users: [User]
   }
 `;
 
-const resolvers = {
+export const resolvers = {
   Query: {
     users() {
-      return "there will be users here"
+      return userModel.list()
     }
   },
-};
-
-module.exports = {
-  typeDefs,
-  resolvers
 };
