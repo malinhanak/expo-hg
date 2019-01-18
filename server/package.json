@@ -1,0 +1,23 @@
+{
+  "name": "expo-hg",
+  "version": "1.0.0",
+  "description": "Part of graduation project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malinhanak/expo-hg.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malinhanak/expo-hg/issues"
+  },
+  "homepage": "https://github.com/malinhanak/expo-hg#readme",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
