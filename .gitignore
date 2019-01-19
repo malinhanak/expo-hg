@@ -10,7 +10,7 @@
 **/build
 
 # misc
-db.json
+db.json*
 config.js
 .vscode
 .DS_Store
