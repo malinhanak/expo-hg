@@ -1,15 +1,16 @@
 import axios from 'axios';
 
-class User {
+class Item {
   constructor() {
     this.api = axios.create({
-      baseURL: 'http://localhost:1337' // json-server endpoint
+      baseURL: 'http://localhost:1337'
     })
   }
 
   list() {
-    return this.api.get('/users').then(res => res.data)
+    return this.api.get('/users')
+    .then(res => res.data)
   }
 }
 
-export default new User()
+export default new Item()

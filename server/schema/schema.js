@@ -1,24 +1,23 @@
 const { gql } = require('apollo-server-express');
-import userModel  from './models';
+import itemModel  from './models';
 
 export const typeDefs = gql`
-  type User {
+  type Item {
     id: ID
     name: String
     age: Int
     email: String
-    friends: [User]
   }
 
   type Query {
-    users: [User]
+    items: [Item]
   }
 `;
 
 export const resolvers = {
   Query: {
-    users() {
-      return userModel.list()
+    items() {
+      return itemModel.list()
     }
   },
 };
