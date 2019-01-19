@@ -21,6 +21,10 @@ export const typeDefs = gql`
   type Query {
     items: [Item]
   }
+
+  type Mutation {
+    createItem(id: ID!, name: String!, description: String, quantity: Int!, prize: Int!, category: ItemCategory!): Item
+  }
 `;
 
 export const resolvers = {
@@ -29,4 +33,9 @@ export const resolvers = {
       return itemModel.list()
     }
   },
+  Mutation: {
+    createItem(source, args) {
+      return itemModel.create(args)
+    }
+  }
 };
