@@ -13,7 +13,12 @@ class Item {
   }
   // model to create a new item via mutation
   create(data) {
-    return this.api.post('/item', data)
+    return this.api.post('/items', data)
+    .then(res => res.data)
+  }
+
+  update(id, data) {
+    return this.api.patch(`/items/${id}`, data)
     .then(res => res.data)
   }
 }

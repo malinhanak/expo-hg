@@ -23,7 +23,8 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createItem(id: ID!, name: String!, description: String, quantity: Int!, prize: Int!, category: ItemCategory!): Item
+    createItem(name: String!, description: String, quantity: Int, prize: Int, category: ItemCategory!): Item
+    updateItem(id: ID!, name: String, description: String, quantity: Int, prize: Int, category: ItemCategory!): Item
   }
 `;
 
@@ -36,6 +37,9 @@ export const resolvers = {
   Mutation: {
     createItem(source, args) {
       return itemModel.create(args)
+    },
+    updateItem(source, args) {
+      return itemModel.update(args.id, args)
     }
   }
 };
