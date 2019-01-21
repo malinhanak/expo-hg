@@ -1,9 +1,11 @@
 import axios from 'axios';
+import dbConfig  from '../config';
 
+const baseURL =  dbConfig.dbPath;
 class Item {
   constructor() {
     this.api = axios.create({
-      baseURL: 'http://localhost:1337'
+      baseURL
     })
   }
   // will list all items with no specification to Id.
