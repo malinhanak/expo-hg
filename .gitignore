@@ -11,7 +11,7 @@
 
 # misc
 server/db.json
-config.js
+server/config.js
 .vscode
 .DS_Store
 .env.local

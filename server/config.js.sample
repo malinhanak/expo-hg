@@ -1,0 +1,5 @@
+const dbConfig = {
+  dbPath: 'http://localhost:1337'
+}
+
+export default dbConfig
