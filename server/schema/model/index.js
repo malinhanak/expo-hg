@@ -1,7 +1,2 @@
-import itemModel from './item'
-import userModel from './user'
-
-export default {
-  itemModel,
-  userModel
-}
+export {default as itemModel} from './item';
+export {default as userModel} from './user';

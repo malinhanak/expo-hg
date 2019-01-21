@@ -1,5 +1,5 @@
-const { gql } = require('apollo-server-express');
-import { itemModel, }  from './model';
+import { gql } from 'apollo-server-express';
+import { itemModel, userModel }  from './model';
 
 export const typeDefs = gql`
 
