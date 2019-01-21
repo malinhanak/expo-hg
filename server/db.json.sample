@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": 0,
+      "name": "Blue helmet",
+      "description": "Basic blue safty helmet",
+      "quantity": 10,
+      "prize": 6,
+      "category": "RIDER"
+    },
+    {
+      "id": 1,
+      "name": "Brown bridle",
+      "description": "A basic brown leather bridle",
+      "quantity": 100,
+      "prize": 10,
+      "category": "HORSE"
+    },
+    {
+      "name": "Jumping Saddle",
+      "description": "A basic brown leather jumping saddle",
+      "quantity": 15,
+      "prize": 20,
+      "category": "HORSE",
+      "id": 2
+    }
+  ]
+}
