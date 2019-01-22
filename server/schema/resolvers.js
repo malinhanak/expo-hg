@@ -7,6 +7,9 @@ export const resolvers = {
     },
     getUsers() {
       return userModel.list()
+    },
+    findUser(source, { id }) {
+      return userModel.find(id)
     }
   },
   Mutation: {
