@@ -13,13 +13,31 @@ class Item {
     return this.api.get('/items')
     .then(res => res.data)
   }
+  find(id) {
+    return this.api.get(`/items/${id}`)
+    .then((res) => res.data)
+  }
+  findTwo(id, name) {
+    return this.api.get(`/items/name?"${name}"`)
+    .then((res) => {
+      // if(id){
+      //   return res.data.filter((byId) => {
+      //     return id === byId
+      //   })
+      // }
+      if(name){
+        return res.data.filter((byName) => {
+          return name === byName
+        })
+      }
+      return res.data
+    })
+  }
   create(data) {
     return this.api.post('/items', data)
     .then(res => res.data)
   }
   update(id, data) {
-    console.log('id', id)
-    console.log('data', data)
     return this.api.patch(`/items/${id}`, data)
     .then(res => res.data)
   }
