@@ -21,9 +21,13 @@ class User {
     return this.api.post('/users', data)
     .then(res => res.data)
   }
-  update(id, data) {
+  update(id) {
     return this.api.patch(`/users/${id}`, data)
     .then(res => res.data)
+  }
+  delete(id) {
+    return this.api.delete(`/users/${id}`)
+    .then(() => {id})
   }
   updateInventory(id, data) {
     return this.api.get(`/users/${id}`)
