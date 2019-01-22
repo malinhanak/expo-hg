@@ -27,6 +27,9 @@ export const resolvers = {
     },
     deleteUser(source, { id }) {
       return userModel.delete(id)
+    },
+    deleteItem(source, { id }) {
+      return itemModel.delete(id)
     }
   }
 };
