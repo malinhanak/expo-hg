@@ -1,8 +1,6 @@
 import { gql } from 'apollo-server-express';
-import { itemModel, userModel }  from './model';
 
 export const typeDefs = gql`
-
   enum ItemCategory {
     HORSE
     RIDER
@@ -11,6 +9,7 @@ export const typeDefs = gql`
 
   type Item {
     id: ID
+    EAN: String
     name: String
     description: String
     quantity: Int
@@ -18,28 +17,45 @@ export const typeDefs = gql`
     category: ItemCategory
   }
 
+  type User {
+    id: ID
+    fullName: String
+    email: String
+    #stableId: String
+    #horses: Int
+    inventory: [Iventory]
+    coin: Int
+  }
+
+  type Iventory {
+    EAN: ID
+    name: String
+    category: ItemCategory
+    quantity: Int
+  }
+
+  type credentials {
+    userId: String
+    role: String
+    credentials: String
+  }
+
+  input IventoryInput {
+    EAN: ID
+    name: String
+    category: ItemCategory
+    quantity: Int
+  }
+
   type Query {
-    items: [Item]
+    getItems: [Item]
+    getUsers: [User]
   }
 
   type Mutation {
     createItem(name: String!, description: String, quantity: Int, prize: Int, category: ItemCategory!): Item
     updateItem(id: ID!, name: String, description: String, quantity: Int, prize: Int, category: ItemCategory!): Item
+    createUser(fullName: String!, email: String!, inventory: [IventoryInput], coin: Int): User
+    updateUserInventory(id: ID!, inventory: [IventoryInput]): User
   }
 `;
-
-export const resolvers = {
-  Query: {
-    items() {
-      return itemModel.list()
-    }
-  },
-  Mutation: {
-    createItem(source, args) {
-      return itemModel.create(args)
-    },
-    updateItem(source, args) {
-      return itemModel.update(args.id, args)
-    }
-  }
-};
