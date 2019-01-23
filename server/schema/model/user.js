@@ -21,7 +21,7 @@ class User {
     return this.api.post('/users', data)
     .then(res => res.data)
   }
-  update(id) {
+  update(id, data) {
     return this.api.patch(`/users/${id}`, data)
     .then(res => res.data)
   }

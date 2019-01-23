@@ -1,28 +1,32 @@
 import Item from './item';
 
 jest.mock('axios');
+let mock;
+let resp;
+
+beforeEach(() => {
+  mock = jest.fn().mockImplementation(() => Promise.resolve(resp))
+});
 
 test('Should create an item', () => {
-  const resp = {data: [{name: "item1", description: "item one is awesome", quantity: "3", prize: "60", category: "RIDER"}]};
-  const postMock = jest.fn().mockImplementation(() => Promise.resolve(resp))
+  resp = {data: [{name: "item1", description: "item one is awesome", quantity: "3", prize: "60", category: "RIDER"}]};
 
   Item.api = {
-    post: postMock
+    post: mock
   }
 
   return Item.create({name: "item1", description: "item one is awesome", quantity: "3", prize: "60", category: "RIDER"})
   .then(item => {
-    expect(postMock.mock.calls[0][0]).toEqual("/items")
-    expect(postMock.mock.calls[0][1]).toEqual(resp.data[0])
-    expect(postMock.mock.calls.length).toBe(1)
+    expect(mock.mock.calls[0][0]).toEqual("/items")
+    expect(mock.mock.calls[0][1]).toEqual(resp.data[0])
+    expect(mock.mock.calls.length).toBe(1)
   })
 });
 
 test('Should update item', () => {
-  const resp = {data: [{id: 3, name: "item1", description: "item one is awesome", quantity: "3"}]};
-  const patchMock = jest.fn().mockImplementation(() => Promise.resolve(resp))
+  resp = {data: [{id: 3, name: "item1", description: "item one is awesome", quantity: "3"}]};
   Item.api = {
-    patch: patchMock
+    patch: mock
   }
 
   return Item.update(3, {name: "item1", description: "item one is awesome, yaaay", quantity: "3"})
