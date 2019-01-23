@@ -10,6 +10,16 @@ export const resolvers = {
     },
     findUser(source, { id }) {
       return userModel.find(id)
+    },
+    findItem(source, {id}) {
+      return itemModel.find(id)
+    },
+    findItemTwo(source, {category, name}) {
+      return itemModel.findTwo(category, name)
+      .then((res) => {
+          console.log(res)
+          return res
+      })
     }
   },
   Mutation: {
