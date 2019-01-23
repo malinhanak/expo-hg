@@ -36,6 +36,10 @@ class Item {
     return this.api.patch(`/items/${id}`, data)
     .then(res => res.data)
   }
+  delete(id) {
+    return this.api.delete(`/items/${id}`)
+    .then(() => { id })
+  }
 }
 
 export default new Item()

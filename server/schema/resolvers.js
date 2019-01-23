@@ -34,6 +34,12 @@ export const resolvers = {
     },
     updateUserInventory(source, args){
       return userModel.updateInventory(args.id, args)
+    },
+    deleteUser(source, { id }) {
+      return userModel.delete(id)
+    },
+    deleteItem(source, { id }) {
+      return itemModel.delete(id)
     }
   }
 };

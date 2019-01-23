@@ -60,5 +60,7 @@ export const typeDefs = gql`
     updateItem(id: ID!, name: String, description: String, quantity: Int, prize: Int, category: ItemCategory!): Item
     createUser(fullName: String!, email: String!, inventory: [IventoryInput], coin: Int): User
     updateUserInventory(id: ID!, inventory: [IventoryInput]): User
+    deleteUser(id: ID!): User
+    deleteItem(id: ID!): Item
   }
 `;
