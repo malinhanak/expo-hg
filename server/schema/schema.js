@@ -52,7 +52,7 @@ export const typeDefs = gql`
     getUsers: [User]
     findUser(id: ID!): User
     findItem(id: ID): Item
-    findItemTwo(category: String, name: String): [Item]
+    searchForItem(category: String, name: String): [Item]
   }
 
   type Mutation {

@@ -14,12 +14,8 @@ export const resolvers = {
     findItem(source, {id}) {
       return itemModel.find(id)
     },
-    findItemTwo(source, {category, name}) {
-      return itemModel.findTwo(category, name)
-      .then((res) => {
-          console.log(res)
-          return res
-      })
+    searchForItem(source, {category, name}) {
+      return itemModel.search(category, name)
     }
   },
   Mutation: {

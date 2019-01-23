@@ -12,33 +12,34 @@ class Item {
   list() {
     return this.api.get('/items')
     .then(res => res.data)
+    .catch((error) => console.log(error))
   }
   find(id) {
     return this.api.get(`/items/${id}`)
     .then((res) => res.data)
+    .catch((error) => console.log(error))
   }
-  findTwo(category, name) {
-    console.log('name', name)
-    console.log('category', category)
+  search(category, name) {
     const key = name ? 'name' : 'category'
     const term = name ? name : category.toUpperCase()
-    console.log('api', `/items?${key}=${term}`)
     return this.api.get(`/items?${key}=${term}`)
-    .then((res) => {
-      return res.data
-    })
+    .then((res) => res.data)
+    .catch((error) => console.log(error))
   }
   create(data) {
     return this.api.post('/items', data)
     .then(res => res.data)
+    .catch((error) => console.log(error))
   }
   update(id, data) {
     return this.api.patch(`/items/${id}`, data)
     .then(res => res.data)
+    .catch((error) => console.log(error))
   }
   delete(id) {
     return this.api.delete(`/items/${id}`)
     .then(() => { id })
+    .catch((error) => console.log(error))
   }
 }
 
