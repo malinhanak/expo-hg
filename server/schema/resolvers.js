@@ -2,40 +2,40 @@ import { itemModel, userModel }  from './model';
 
 export const resolvers = {
   Query: {
-    getItems() {
-      return itemModel.list()
+    getItems: async () => {
+      return await itemModel.list()
     },
-    getUsers() {
-      return userModel.list()
+    getUsers: async () => {
+      return await userModel.list()
     },
-    findUser(source, { id }) {
-      return userModel.find(id)
+    findUser: async (source, { id }) => {
+      return await userModel.find(id)
     },
-    findItem(source, {id}) {
-      return itemModel.find(id)
+    findItem: async (source, {id}) => {
+      return await itemModel.find(id)
     },
-    searchForItem(source, {category, name}) {
-      return itemModel.search(category, name)
+    searchForItem: async (source, {category, name}) => {
+      return await itemModel.search(category, name)
     }
   },
   Mutation: {
-    createItem(source, args) {
-      return itemModel.create(args)
+    createItem: async (source, args) => {
+      return await itemModel.create(args)
     },
-    updateItem(source, args) {
-      return itemModel.update(args.id, args)
+    updateItem: async (source, args) => {
+      return await itemModel.update(args.id, args)
     },
-    createUser(source, args) {
-      return userModel.create(args)
+    createUser: async (source, args) => {
+      return await userModel.create(args)
     },
-    updateUserInventory(source, args){
-      return userModel.updateInventory(args.id, args)
+    updateUserInventory: async (source, args) => {
+      return await userModel.updateInventory(args.id, args)
     },
-    deleteUser(source, { id }) {
-      return userModel.delete(id)
+    deleteUser: async (source, { id }) => {
+      return await userModel.delete(id)
     },
-    deleteItem(source, { id }) {
-      return itemModel.delete(id)
+    deleteItem: async (source, { id }) => {
+      return await itemModel.delete(id)
       .catch((err) => {
         if(err === "invalidId"){
           console.log(err, "The id is invalid")
