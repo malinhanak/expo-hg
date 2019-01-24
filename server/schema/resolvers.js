@@ -36,6 +36,12 @@ export const resolvers = {
     },
     deleteItem(source, { id }) {
       return itemModel.delete(id)
+      .catch((err) => {
+        if(err === "invalidId"){
+          console.log(err, "The id is invalid")
+          throw new Error('The id is invalid')
+        }
+      })
     }
   }
 };

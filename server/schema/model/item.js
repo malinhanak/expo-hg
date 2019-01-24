@@ -37,9 +37,16 @@ class Item {
     .catch((error) => console.log(error))
   }
   delete(id) {
+    if (id === null || id === undefined) {
+      throw new Error("invalidId")
+    }
     return this.api.delete(`/items/${id}`)
-    .then(() => { id })
-    .catch((error) => console.log(error))
+    .then(() => {
+      return { id }
+    })
+    .catch((error) => {
+      throw new Error(error)
+    })
   }
 }
 
