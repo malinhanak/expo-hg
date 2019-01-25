@@ -37,10 +37,11 @@ export const resolvers = {
     deleteItem: async (source, { id }) => {
       return await itemModel.delete(id)
       .catch((err) => {
-        if(err === "invalidId"){
-          console.log(err, "The id is invalid")
-          throw new Error('The id is invalid')
+        if(err.message === "NonExistingID"){
+          throw new Error('The id you are trying to delete does not exist!')
         }
+        throw new Error('Horrible error - run, run!!')
+
       })
     }
   }
