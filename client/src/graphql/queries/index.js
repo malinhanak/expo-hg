@@ -1,0 +1,1 @@
+export {default as GET_ITEMS} from './getItems';
