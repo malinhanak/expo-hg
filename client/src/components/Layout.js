@@ -6,10 +6,18 @@ import Navigation from './Navigation';
 class Home extends Component {
   render() {
     return (
-      <>
-      <Navigation />
-      <div>{this.props.children}</div>
-      </>
+      <div className="basic-grid">
+        <div className="top-level">
+          top level
+        </div>
+        <Navigation />
+        <div className="main-content">
+          {this.props.children}
+        </div>
+        <div className="footer">
+          footer
+        </div>
+      </div>
       
     )
   }

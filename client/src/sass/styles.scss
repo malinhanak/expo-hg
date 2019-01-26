@@ -1,22 +1,58 @@
-nav {
-  width: 15%;
-  background-color: white;
-  display:flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-self: stretch;
+@mixin display-grid {
+  display: -ms-grid;
+  display: grid;
+}
+@mixin basic-styles {
+  border: 1px solid black;
 }
 
-.navLink {
-  display:flex;
-  align-self: stretch;
-  background-color: #607d8b;
-  color: white;
-  padding:10px 10px;
-  border-right: 2px solid #80cbc4;
+.basic-grid {
+  @include display-grid;
+  grid-template-columns: 15% repeat(3, 1fr) 3rem;
+  grid-template-rows: 3rem repeat(2, 1fr) 3rem;
+  grid-gap: 10px;
+  height: 100vh;
+  
+  .top-level {
+    @include basic-styles;
+    grid-column: span 5;
+    grid-row: 1;
+  }
+  .main-content {
+    @include basic-styles;
+    grid-column: 2 / span 4;
+    grid-row: 2;
+  }
+  .footer {
+    @include basic-styles;
+    background-color: white;
+    grid-column: span 5;
+    grid-row: 4;
+  }
+  nav {
+    @include basic-styles;
+    width: 100%;
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: stretch;
+    grid-column: 1;
+    grid-row: 2 / span 2;
+  
+    .navLink {
+      display:flex;
+      align-self: stretch;
+      background-color: #607d8b;
+      color: white;
+      padding:10px 10px;
+      border-right: 2px solid #80cbc4;
+    }
+  
+    .navLinkActive {
+      border-right: 5px solid #80cbc4;
+    }
+  }
 }
 
-.navLinkActive {
-  border-right: 5px solid #80cbc4;
-}
