@@ -6,53 +6,73 @@
   border: 1px solid black;
 }
 
+$font-stack: 'Comfortaa', cursive;
+
 .basic-grid {
   @include display-grid;
-  grid-template-columns: 15% repeat(3, 1fr) 3rem;
-  grid-template-rows: 3rem repeat(2, 1fr) 3rem;
-  grid-gap: 10px;
+  grid-template-columns: 10% repeat(3, 1fr) 3rem;
+  grid-template-rows: auto repeat(2, 1fr) 3rem;
+  grid-gap: 0;
   height: 100vh;
-  
+
   .top-level {
-    @include basic-styles;
+    background-color: #3e3b50;
+    padding-left: 10px;
     grid-column: span 5;
     grid-row: 1;
+
+    h1 {
+      font: normal 100 18px/100% $font-stack;
+      color: white;
+    }
   }
   .main-content {
-    @include basic-styles;
-    grid-column: 2 / span 4;
-    grid-row: 2;
+    grid-column: 2 / span 3;
+    grid-row: 2 / span 2;
   }
   .footer {
-    @include basic-styles;
     background-color: white;
     grid-column: span 5;
     grid-row: 4;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      padding: 5px 5px;
+      font: normal 100 11px/100% $font-stack;
+      color: #3e3b50;
+    }
   }
   nav {
-    @include basic-styles;
-    width: 100%;
-    background-color: white;
+    background-color: #4f4c61;
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: flex-end;
     align-self: stretch;
     grid-column: 1;
     grid-row: 2 / span 2;
   
     .navLink {
-      display:flex;
       align-self: stretch;
-      background-color: #607d8b;
-      color: white;
-      padding:10px 10px;
-      border-right: 2px solid #80cbc4;
+      color: #e5e5e5;
+      padding:15px 15px;
+      text-align:right;
+      text-decoration:none;
+      font: normal 100 11px/100% $font-stack;
     }
   
     .navLinkActive {
-      border-right: 5px solid #80cbc4;
+      border-left: 3px solid #bab8d1;
+      background-color:#5a586d;
     }
+  }
+  .side-nav {
+    background-color:#e5e5e5;
+    color: #3e3b50;
+    grid-column: 5;
+    grid-row: 2 / span 2;
   }
 }
 
