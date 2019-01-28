@@ -5,8 +5,8 @@ class Home extends Component {
   render() {
     return (
       <nav>
-        <NavLink to="/" className="navLink" exact={true} activeClassName="navLinkActive">Home</NavLink>
-        <NavLink to="/Heeej" className="navLink" exact={true} activeClassName="navLinkActive">Test</NavLink>
+        <NavLink to="/" className="navLink" exact={true} activeClassName="navLinkActive">Start</NavLink>
+        <NavLink to="/webshop" className="navLink" exact={true} activeClassName="navLinkActive">Shoppen</NavLink>
       </nav>
     )
   }

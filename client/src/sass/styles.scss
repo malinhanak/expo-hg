@@ -3,32 +3,99 @@
   display: grid;
 }
 @mixin basic-styles {
-  border: 1px solid black;
+  padding: 15px 15px;
 }
 
-$font-stack: 'Comfortaa', cursive;
+$font-stack-main: 'Comfortaa', cursive;
+$font-stack-content: 'Open Sans', sans-serif;
 
 .basic-grid {
   @include display-grid;
-  grid-template-columns: 10% repeat(3, 1fr) 3rem;
+  grid-template-columns: 154px repeat(3, 1fr) 3rem;
   grid-template-rows: auto repeat(2, 1fr) 3rem;
   grid-gap: 0;
   height: 100vh;
 
-  .top-level {
-    background-color: #3e3b50;
-    padding-left: 10px;
-    grid-column: span 5;
+  article {
+    @include basic-styles;
+    font: normal 700 11px/100% $font-stack-main;
+    text-transform:uppercase;
+    color: white;
+    background-color: #4f4c61;
+    grid-column: 1;
     grid-row: 1;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
 
-    h1 {
-      font: normal 100 18px/100% $font-stack;
-      color: white;
+    .menu-options {
+      margin-left: 10px;
+      font-size:14px;
+    }
+  }
+  .top-level {
+    padding: 0 15px;
+    background-color:white;
+    grid-column: 2 / span 3;
+    grid-row: 1;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    #menu-icon {
+      margin-right: 10px;
+      font-size:25px!important;
+      color: #4f4c61;
+    }
+
+    .main-search {
+      font: normal 700 12px/100% $font-stack-main;
+      color: lightgray;
+      width:20%;
+      border-radius:8px;
+      border:1px solid lightgray;
+      padding:5px 5px;
+      margin-left:auto;
+      margin-right:15px;
+    }
+
+    input.main-search::placeholder {
+      font-size:10px;
+      color: lightgray;
     }
   }
   .main-content {
     grid-column: 2 / span 3;
     grid-row: 2 / span 2;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .content-box {
+      align-self: stretch;
+      height:100%;
+      background-color: white;
+      margin: 30px 0 30px 30px;
+      border: 1px solid lightgray;
+      padding: 15px 15px;
+      font: normal 400 11px/100% $font-stack-content;
+
+      h1 {
+        margin: 0 0 5px 0;
+      }
+
+      .table-style {
+        font: normal 400 12px/100% $font-stack-content;
+
+        th { 
+          font-size: 13px;
+          font-weight: 700;
+          color: #4f4c61;
+        }
+        td { font-size: 12px; }
+      }
+    }
   }
   .footer {
     background-color: white;
@@ -40,7 +107,7 @@ $font-stack: 'Comfortaa', cursive;
 
     p {
       padding: 5px 5px;
-      font: normal 100 11px/100% $font-stack;
+      font: normal 100 11px/100% $font-stack-main;
       color: #3e3b50;
     }
   }
@@ -55,12 +122,12 @@ $font-stack: 'Comfortaa', cursive;
     grid-row: 2 / span 2;
   
     .navLink {
+      @include basic-styles;
       align-self: stretch;
       color: #e5e5e5;
-      padding:15px 15px;
       text-align:right;
       text-decoration:none;
-      font: normal 100 11px/100% $font-stack;
+      font: normal 100 11px/100% $font-stack-main;
     }
   
     .navLinkActive {
@@ -68,11 +135,34 @@ $font-stack: 'Comfortaa', cursive;
       background-color:#5a586d;
     }
   }
+  .side-nav-top {
+    @include basic-styles;
+    background-color:#3e3b50;
+    color: white;
+    grid-column: 5;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
   .side-nav {
-    background-color:#e5e5e5;
-    color: #3e3b50;
+    @include basic-styles;
     grid-column: 5;
     grid-row: 2 / span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .side-menu-icon {
+      margin-bottom: 10px;
+      font-size:19px;
+      color: #4f4c61;
+    }
+    .side-menu-icon.bottom {
+      margin-top: auto;
+    }
   }
 }
 
