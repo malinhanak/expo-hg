@@ -65,4 +65,9 @@ export const typeDefs = gql`
     deleteItem(id: ID!): Item
   }
 
+  type Subscription {
+    itemUpdated: Item
+    itemCreated: Item
+  }
+
 `;

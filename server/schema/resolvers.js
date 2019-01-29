@@ -1,6 +1,15 @@
 import { itemModel, userModel }  from './model';
+import pubsub, { EVENTS } from './subscriptions';
 
 export const resolvers = {
+  Subscription: {
+    itemUpdated: {
+      subscribe: () => pubsub.asyncIterator(EVENTS.ITEM.UPDATED),
+    },
+    itemCreated: {
+      subscribe: () => pubsub.asyncIterator(EVENTS.ITEM.CREATED)
+    },
+  },
   Query: {
     getItems: async () => {
       return await itemModel.list()
@@ -20,10 +29,16 @@ export const resolvers = {
   },
   Mutation: {
     createItem: async (source, args) => {
-      return await itemModel.create(args)
+      const item = await itemModel.create(args)
+      pubsub.publish(EVENTS.ITEM.CREATED, {
+        itemCreated: item });
+      return item
     },
     updateItem: async (source, args) => {
-      return await itemModel.update(args.id, args)
+      const item = await itemModel.update(args.id, args)
+      pubsub.publish(EVENTS.ITEM.UPDATED, { 
+        itemUpdated: item });
+      return item
     },
     createUser: async (source, args) => {
       return await userModel.create(args)
