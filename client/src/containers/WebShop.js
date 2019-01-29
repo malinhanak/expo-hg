@@ -21,19 +21,23 @@ class WebShop extends Component {
 					else if (item.category === 'HORSE'){Cat = 'Häst'}
 					else { Cat = 'Övrigt'}
 
-            	return <TableRow key={item.EAN}>
+            	return (
+                <TableRow key={item.EAN}>
               		<TableCell>{item.name}</TableCell>
+						      <TableCell align="left">{item.color}</TableCell>
                   <TableCell align="left">{item.description}</TableCell>
                   <TableCell align="center">{item.quantity}</TableCell>
-            		<TableCell align="center">{item.prize}</TableCell>
-               	<TableCell align="right">{Cat}</TableCell>
+            		  <TableCell align="center">{item.prize}</TableCell>
+               	  <TableCell align="right">{Cat}</TableCell>
                </TableRow>
+               )
             });
           return (
             <Table className="table-style">
               <TableHead>
                 <TableRow>
                   <TableCell>Namn</TableCell>
+						<TableCell align="left">Color</TableCell>
                   <TableCell align="left">Beskrivning</TableCell>
                   <TableCell align="center">Lagersaldo</TableCell>
                   <TableCell align="center">Pris</TableCell>
