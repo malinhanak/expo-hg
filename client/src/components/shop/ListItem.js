@@ -17,9 +17,6 @@ class WebShop extends Component {
       default:
         category = 'Övrigt'
     }
-    // if(item.category === 'RIDER'){Cat = 'Ryttare'}
-    // else if (item.category === 'HORSE'){Cat = 'Häst'}
-    // else { Cat = 'Övrigt'}
     return category
   }
   render() {
