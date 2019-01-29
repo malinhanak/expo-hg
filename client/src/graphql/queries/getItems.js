@@ -7,6 +7,7 @@ const GET_ITEMS = gql`
       name
       EAN
       description
+      color
       quantity
       prize
       category
