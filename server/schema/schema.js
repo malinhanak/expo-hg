@@ -12,6 +12,7 @@ export const typeDefs = gql`
     EAN: String
     name: String
     description: String
+    color: String
     quantity: Int
     prize: Int
     category: ItemCategory
@@ -56,11 +57,12 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createItem(name: String!, description: String, quantity: Int, prize: Int, category: ItemCategory!): Item
-    updateItem(id: ID!, name: String, description: String, quantity: Int, prize: Int, category: ItemCategory!): Item
+    createItem(EAN: String! name: String!, description: String, color: String quantity: Int, prize: Int, category: ItemCategory!): Item
+    updateItem(id: ID!, EAN: String name: String, description: String, color: String quantity: Int, prize: Int, category: ItemCategory!): Item
     createUser(fullName: String!, email: String!, inventory: [IventoryInput], coin: Int): User
     updateUserInventory(id: ID!, inventory: [IventoryInput]): User
     deleteUser(id: ID!): User
     deleteItem(id: ID!): Item
   }
+
 `;
