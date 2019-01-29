@@ -1,6 +1,7 @@
 import express  from 'express';
-import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
+import cors from 'cors';
+import http from 'http';
 import { typeDefs } from './schema/schema';
 import { resolvers } from './schema/resolvers';
 
@@ -10,21 +11,31 @@ var corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true
 };
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use('*', cors(corsOptions));
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
 
-server.applyMiddleware({ app, path: '/graphql' });
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
-app.listen({ port: 8000 }, () => {
-  console.log('Apollo Server on http://localhost:8000/graphql');
+server.applyMiddleware({ app });
+
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
+
+httpServer.listen({ port: 8000 }, () => {
+  console.log(`Apollo Server on http://localhost:8000${server.graphqlPath}`);
+  console.log(`Subscriptions on ws://localhost:8000${server.subscriptionsPath}`);
 });
