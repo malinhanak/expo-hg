@@ -42,10 +42,7 @@ class WebShop extends Component {
 						document: SUBSCRIBE_ITEM_DELETED,
 						updateQuery: (prev, { subscriptionData }) => {
 							if (!subscriptionData.data) return prev;
-							const deletionId = subscriptionData.data.itemDeleted;
-							console.log('this was deleted', deletionId.id)
-							const itemList = prev.getItems.filter((item) => item.id !== deletionId.id)
-							console.log('prevItem', itemList)
+							const itemList = prev.getItems.filter((item) => item.id !== subscriptionData.data.itemDeleted.id)
 							return Object.assign({}, prev, {
 								getItems: [...itemList]
 							});
