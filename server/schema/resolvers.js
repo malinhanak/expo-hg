@@ -53,21 +53,16 @@ export const resolvers = {
       return await userModel.delete(id)
     },
     deleteItem: async (source, { id }) => {
-      const item = await itemModel.delete(id)
+      const item = itemModel.delete(id)
       pubsub.publish(EVENTS.ITEM.DELETED, {
         itemDeleted: item });
-      return item
-      // .then(() => {
-      //   pubsub.publish(EVENTS.ITEM.DELETED, {
-      //     itemDeleted: item.id });
-      //   return item
-      // })
-      // .catch((err) => {
-      //   if(err.message === "NonExistingID"){
-      //     throw new Error('The id you are trying to delete does not exist!')
-      //   }
-      //   throw new Error('Horrible error - run, run!!')
-      // })
+      return await item
+      .catch((err) => {
+        if(err.message === "NonExistingID"){
+          throw new Error('The id you are trying to delete does not exist!')
+        }
+        throw new Error('Horrible error - run, run!!')
+      })
     }
   }
 };
