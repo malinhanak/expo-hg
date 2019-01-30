@@ -58,7 +58,7 @@ export const typeDefs = gql`
 
   type Mutation {
     createItem(EAN: String! name: String!, description: String, color: String quantity: Int, prize: Int, category: ItemCategory!): Item
-    updateItem(id: ID!, EAN: String name: String, description: String, color: String quantity: Int, prize: Int, category: ItemCategory!): Item
+    updateItem(id: ID!, EAN: String name: String, description: String, color: String quantity: Int, prize: Int, category: ItemCategory): Item
     createUser(fullName: String!, email: String!, inventory: [IventoryInput], coin: Int): User
     updateUserInventory(id: ID!, inventory: [IventoryInput]): User
     deleteUser(id: ID!): User
