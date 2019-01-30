@@ -10,11 +10,6 @@ import { GET_ITEMS } from '../graphql/queries'
 import { SUBSCRIBE_ITEM_UPDATED, SUBSCRIBE_ITEM_CREATED, SUBSCRIBE_ITEM_DELETED } from '../graphql/subscriptions'
 
 class WebShop extends Component {
-	componentDidMount() {
-		this.subscribeItem('itemDeleted')
-		this.subscribeItem('itemUpdated')
-		this.subscribeItem('itemCreated')
-	}
 	subscribeItem = (subscription) => {
 		return (prev, { subscriptionData }) => {
 			if (!subscriptionData.data) return prev;
@@ -44,8 +39,17 @@ class WebShop extends Component {
 					});
 
 					subscribeToMore({
-					document: SUBSCRIBE_ITEM_DELETED,
-					updateQuery: this.subscribeItem('itemDeleted')
+						document: SUBSCRIBE_ITEM_DELETED,
+						updateQuery: (prev, { subscriptionData }) => {
+							if (!subscriptionData.data) return prev;
+							const deletionId = subscriptionData.data.itemDeleted;
+							console.log('this was deleted', deletionId.id)
+							const itemList = prev.getItems.filter((item) => item.id !== deletionId.id)
+							console.log('prevItem', itemList)
+							return Object.assign({}, prev, {
+								getItems: [...itemList]
+							});
+						}
 					});
 
 					const items = data.getItems
