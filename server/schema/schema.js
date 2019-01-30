@@ -68,6 +68,7 @@ export const typeDefs = gql`
   type Subscription {
     itemUpdated: Item
     itemCreated: Item
+    itemDeleted: Item
   }
 
 `;

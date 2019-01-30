@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-const SUBSCRIBE_ITEM_UPDATE = gql`
+const SUBSCRIBE_ITEM_UPDATED = gql`
   subscription itemUpdated {
     itemUpdated {
       id
@@ -15,4 +15,4 @@ const SUBSCRIBE_ITEM_UPDATE = gql`
   }
 `;
 
-export default SUBSCRIBE_ITEM_UPDATE
+export default SUBSCRIBE_ITEM_UPDATED

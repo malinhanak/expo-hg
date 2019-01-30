@@ -7,10 +7,14 @@ import TableRow from '@material-ui/core/TableRow';
 import ListItem from '../components/shop/ListItem'
 import { Query } from "react-apollo";
 import { GET_ITEMS } from '../graphql/queries'
-import SUBSCRIBE_ITEM_UPDATE from '../graphql/subscriptions/itemUpdated'
-import SUBSCRIBE_ITEM_CREATED from '../graphql/subscriptions/itemCreated'
+import { SUBSCRIBE_ITEM_UPDATED, SUBSCRIBE_ITEM_CREATED, SUBSCRIBE_ITEM_DELETED } from '../graphql/subscriptions'
 
 class WebShop extends Component {
+	componentDidMount() {
+		this.subscribeItem('itemDeleted')
+		this.subscribeItem('itemUpdated')
+		this.subscribeItem('itemCreated')
+	}
 	subscribeItem = (subscription) => {
 		return (prev, { subscriptionData }) => {
 			if (!subscriptionData.data) return prev;
@@ -35,8 +39,13 @@ class WebShop extends Component {
 					});
 
 					subscribeToMore({
-					document: SUBSCRIBE_ITEM_UPDATE,
+					document: SUBSCRIBE_ITEM_UPDATED,
 					updateQuery: this.subscribeItem('itemUpdated')
+					});
+
+					subscribeToMore({
+					document: SUBSCRIBE_ITEM_DELETED,
+					updateQuery: this.subscribeItem('itemDeleted')
 					});
 
 					const items = data.getItems

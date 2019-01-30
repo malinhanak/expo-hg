@@ -9,6 +9,9 @@ export const resolvers = {
     itemCreated: {
       subscribe: () => pubsub.asyncIterator(EVENTS.ITEM.CREATED)
     },
+    itemDeleted: {
+      subscribe: () => pubsub.asyncIterator(EVENTS.ITEM.DELETED)
+    },
   },
   Query: {
     getItems: async () => {
@@ -50,14 +53,21 @@ export const resolvers = {
       return await userModel.delete(id)
     },
     deleteItem: async (source, { id }) => {
-      return await itemModel.delete(id)
-      .catch((err) => {
-        if(err.message === "NonExistingID"){
-          throw new Error('The id you are trying to delete does not exist!')
-        }
-        throw new Error('Horrible error - run, run!!')
-
-      })
+      const item = await itemModel.delete(id)
+      pubsub.publish(EVENTS.ITEM.DELETED, {
+        itemDeleted: item });
+      return item
+      // .then(() => {
+      //   pubsub.publish(EVENTS.ITEM.DELETED, {
+      //     itemDeleted: item.id });
+      //   return item
+      // })
+      // .catch((err) => {
+      //   if(err.message === "NonExistingID"){
+      //     throw new Error('The id you are trying to delete does not exist!')
+      //   }
+      //   throw new Error('Horrible error - run, run!!')
+      // })
     }
   }
 };

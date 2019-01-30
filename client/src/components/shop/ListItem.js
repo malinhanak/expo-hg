@@ -22,8 +22,8 @@ class WebShop extends Component {
   render() {
     const items = this.props.list.map((item) => {
       return (
-        <TableRow key={item.EAN}>
-          <TableCell>{item.name}</TableCell>
+        <TableRow key={item.id}>
+          <TableCell>({item.id}) {item.name}</TableCell>
           <TableCell align="left">{item.color}</TableCell>
           <TableCell align="left">{item.description}</TableCell>
           <TableCell align="center">{item.quantity}</TableCell>
