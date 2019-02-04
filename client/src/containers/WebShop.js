@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import ListItem from '../components/shop/ListItem'
+import ShopTable from '../components/shop/ShopTable'
 import { Query } from "react-apollo";
-import { GET_ITEMS } from '../graphql/queries'
-import { SUBSCRIBE_ITEM_UPDATED, SUBSCRIBE_ITEM_CREATED, SUBSCRIBE_ITEM_DELETED } from '../graphql/subscriptions'
+import { GET_ITEMS } from '../graphql/queries';
+import { SUBSCRIBE_ITEM_UPDATED, SUBSCRIBE_ITEM_CREATED, SUBSCRIBE_ITEM_DELETED } from '../graphql/subscriptions';
 
 class WebShop extends Component {
 	subscribeItem = (subscription) => {
@@ -22,6 +17,7 @@ class WebShop extends Component {
 	}
 	  
   	render() {
+			const { match, history, location } = this.props
     	return (
 			<Query query={GET_ITEMS}>
 				{({ loading, error, data, subscribeToMore }) => {
@@ -50,23 +46,24 @@ class WebShop extends Component {
 					});
 
 					const items = data.getItems
-					const listItem = <ListItem list={items}  />
 					return (
-						<Table className="table-style">
-						<TableHead>
-							<TableRow>
-								<TableCell>Namn</TableCell>
-								<TableCell align="left">Color</TableCell>
-								<TableCell align="left">Beskrivning</TableCell>
-								<TableCell align="center">Lagersaldo</TableCell>
-								<TableCell align="center">Pris</TableCell>
-								<TableCell align="right">Kategori</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{items ? listItem : 'Shoppen är tyvärr tom'}
-						</TableBody>
-						</Table>
+						<div className="content-box">
+							<h3 className="title cat-title">Kategorier</h3>
+							<article className="category cat-1">
+								<div className="category-name">Hästar</div>
+							</article>
+							<article className="category cat-2">
+								<div className="category-name">Hästutrustning</div>
+							</article>
+							<article className="category cat-3">
+								<div className="category-name">Ryttareutrustning</div>
+							</article>
+							<article className="category cat-4">
+								<div className="category-name">Övrigt</div>
+							</article>
+							<h3 className="title shop-title">Webshop</h3>
+							<ShopTable payload={items} router={{history, match, location}}  />
+						</div>
 					);
 				}}
 			</Query>

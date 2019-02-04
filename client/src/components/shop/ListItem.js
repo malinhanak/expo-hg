@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Avatar from '@material-ui/core/Avatar';
+import ImageIcon from '@material-ui/icons/Image';
+import ButtonMenu from './ButtonMenu'
 
 class WebShop extends Component {
   getCategory = (item) => {
@@ -23,12 +26,20 @@ class WebShop extends Component {
     const items = this.props.list.map((item) => {
       return (
         <TableRow key={item.id}>
-          <TableCell>({item.id}) {item.name}</TableCell>
+          <TableCell style={{display:'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <Avatar style={{marginRight: '5px'}}><ImageIcon /></Avatar>
+            <div style={{display:'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <h3 style={{margin: '0 0 6px 0'}}>{item.name}</h3>
+              Item id {item.id}
+            </div>
+          </TableCell>
           <TableCell align="left">{item.color}</TableCell>
-          <TableCell align="left">{item.description}</TableCell>
           <TableCell align="center">{item.quantity}</TableCell>
           <TableCell align="center">{item.prize}</TableCell>
-           <TableCell align="right">{this.getCategory(item)}</TableCell>
+          <TableCell align="right">{this.getCategory(item)}</TableCell>
+			 <TableCell align="right">
+				 <ButtonMenu id={item.id}/>
+			 </TableCell>
        </TableRow>
        )
     });
