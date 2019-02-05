@@ -3,7 +3,8 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
   enum ItemCategory {
     HORSE
-    RIDER
+    HORSE_GEAR
+    RIDER_GEAR
     MISC
   }
 
