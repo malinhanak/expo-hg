@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
-import client from './models/client';
+import { client } from './store';
 import './sass/styles.scss';
 import './dist'
 
