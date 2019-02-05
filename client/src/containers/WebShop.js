@@ -4,7 +4,7 @@ import connect from '../HOC/connect';
 
 class WebShop extends Component {  
   	render() {
-		const { match, history, location } = this.props
+		console.log('props', this.props)
     	return (
 			<div className="content-box">
 				<h3 className="title cat-title">Kategorier</h3>
@@ -21,7 +21,7 @@ class WebShop extends Component {
 					<div className="category-name">Övrigt</div>
 				</article>
 				<h3 className="title shop-title">Webshop</h3>
-				<ShopTable payload={this.props.data} router={{history, match, location}}  />
+				<ShopTable payload={this.props.data}  />
 			</div>
     	);
   	}
