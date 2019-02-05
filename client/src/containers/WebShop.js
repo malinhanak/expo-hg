@@ -3,19 +3,9 @@ import ShopTable from '../components/shop/ShopTable'
 import { Query } from "react-apollo";
 import { GET_ITEMS } from '../graphql/queries';
 import { SUBSCRIBE_ITEM_UPDATED, SUBSCRIBE_ITEM_CREATED, SUBSCRIBE_ITEM_DELETED } from '../graphql/subscriptions';
+import { subscribeToItemCreatedAndUpdated, subscribeToItemDeleted } from '../store'
 
-class WebShop extends Component {
-	subscribeItem = (subscription) => {
-		return (prev, { subscriptionData }) => {
-			if (!subscriptionData.data) return prev;
-			const nextItem = subscriptionData.data[subscription];
-			const prevItem = prev.getItems.filter((item) => item.id !== nextItem.id)
-    		return Object.assign({}, prev, {
-      		getItems: [nextItem, ...prevItem]
-			});
-		}
-	}
-	  
+class WebShop extends Component {  
   	render() {
 			const { match, history, location } = this.props
     	return (
@@ -26,23 +16,17 @@ class WebShop extends Component {
 
 					subscribeToMore({
 					document: SUBSCRIBE_ITEM_CREATED,
-					updateQuery: this.subscribeItem('itemCreated')
+					updateQuery: subscribeToItemCreatedAndUpdated('itemCreated')
 					});
 
 					subscribeToMore({
 					document: SUBSCRIBE_ITEM_UPDATED,
-					updateQuery: this.subscribeItem('itemUpdated')
+					updateQuery: subscribeToItemCreatedAndUpdated('itemUpdated')
 					});
 
 					subscribeToMore({
 						document: SUBSCRIBE_ITEM_DELETED,
-						updateQuery: (prev, { subscriptionData }) => {
-							if (!subscriptionData.data) return prev;
-							const itemList = prev.getItems.filter((item) => item.id !== subscriptionData.data.itemDeleted.id)
-							return Object.assign({}, prev, {
-								getItems: [...itemList]
-							});
-						}
+						updateQuery: subscribeToItemDeleted('itemDeleted')
 					});
 
 					const items = data.getItems
