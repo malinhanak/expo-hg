@@ -36,7 +36,7 @@ class WebShop extends Component {
           <TableCell align="left">{item.color}</TableCell>
           <TableCell align="center">{item.quantity}</TableCell>
           <TableCell align="center">{item.prize}</TableCell>
-          <TableCell align="right">{this.getCategory(item)}</TableCell>
+          <TableCell align="center">{this.getCategory(item)}</TableCell>
 			 <TableCell align="right">
 				 <ButtonMenu id={item.id} />
 			 </TableCell>
