@@ -8,7 +8,6 @@ import ListItem from './ListItem';
 
 class ShopTable extends Component {
   	render() {
-    	console.log('my props', this.props.router)
       const listItem = <ListItem list={this.props.payload}  />
     	return (
         <Table className="table-style">

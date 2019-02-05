@@ -14,6 +14,7 @@ $font-stack-content: 'Open Sans', sans-serif;
   grid-template-columns: 154px repeat(5, 1fr) 1rem;
   grid-template-rows: 3rem 3rem 1fr 3rem;
   grid-gap: 0;
+  min-height:100vh;
 
   .top-level {
   @include display-grid;
@@ -168,6 +169,7 @@ $font-stack-content: 'Open Sans', sans-serif;
 				color: white;
 				border: none;
 				padding: 8px 8px;
+				cursor: pointer;
 
 				&:focus {
 					outline: none!important;
@@ -190,6 +192,73 @@ $font-stack-content: 'Open Sans', sans-serif;
 		  	}
       }
     }
+  }
+  .edit-form {
+		grid-column: 1/4;
+		grid-row: 1 / span 4;
+	  box-sizing: border-box;
+	  display:flex;
+	  flex-direction:column;
+	  width: 100%;
+	  background-color:white;
+
+	  button[type=submit] {
+		  background-color: #4f4c61;
+		  color:white;
+		  border:none;
+		  padding:10px 10px;
+		  font: normal 400 14px/100% $font-stack-main;
+	  }
+
+	  h2 {
+		  border-bottom: 1px solid lightgrey;
+		  padding-bottom: 10px;
+		  margin: 0 0 15px 0;
+	  }
+
+	  .id-section {
+		@include display-grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: auto auto;
+		grid-gap: 5px 15px;
+		border: 1px solid #5a586d;
+		border-radius: 3px;
+		background-color: #e9e8f0;
+		padding: 15px 15px;
+		margin: 0 0 15px 0;
+
+		input {
+			padding:10px 10px;
+			border: 0.8px solid#4f4c61;
+			border-radius: 3px;
+			margin: 0!important;
+
+			&:focus {
+				outline: none!important;
+				box-shadow: none!important;
+			}
+		}
+		label {
+			font: normal 400 14px/100% $font-stack-main;
+      	color: #4f4c61;
+		}
+		.ean-lable {
+			grid-column: 1;
+  			grid-row: 1;
+		}
+		.ean {
+			grid-column: 1;
+  			grid-row: 2;
+		}
+		.name-lable {
+			grid-column: 2;
+  			grid-row: 1;
+		}
+		.name {
+			grid-column: 2;
+  			grid-row: 2;
+		}
+	  }
   }
 }
 .footer {

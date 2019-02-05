@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Home extends Component {
   render() {
-    console.log(this.props)
     return (
       <section className="basic-grid">
         <div className="top-level">

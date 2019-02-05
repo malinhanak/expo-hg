@@ -23,7 +23,7 @@ class WebShop extends Component {
     return category
   }
   render() {
-    const items = this.props.list.map((item) => {
+    	const items = this.props.list.map((item) => {
       return (
         <TableRow key={item.id}>
           <TableCell style={{display:'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -38,7 +38,7 @@ class WebShop extends Component {
           <TableCell align="center">{item.prize}</TableCell>
           <TableCell align="right">{this.getCategory(item)}</TableCell>
 			 <TableCell align="right">
-				 <ButtonMenu id={item.id}/>
+				 <ButtonMenu id={item.id} />
 			 </TableCell>
        </TableRow>
        )
