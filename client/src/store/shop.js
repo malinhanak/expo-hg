@@ -31,13 +31,15 @@ export const handleShoppingCart = {
 
 		handleShoppingCart.cartContents = fakeContent
 		handleShoppingCart.getItemCategory()
+		console.log('in init', handleShoppingCart.cartContents)
 	},
 	async getItemCategory(){
+		console.log('in sync', handleShoppingCart.cartContents)
 		let cartItems = JSON.stringify(handleShoppingCart.cartContents);
 		await localStorage.setItem(handleShoppingCart.KEY, cartItems);
 	},
 	find(id){
-		return handleShoppingCart.cartContents.filter(item => item.id === id);
+		return handleShoppingCart.cartContents.filter(item => item.EAN === id).map(product => product.EAN).join()
 	},
 	add(id, item){
 		const checkForExistingId = handleShoppingCart.find(id)
@@ -51,16 +53,24 @@ export const handleShoppingCart = {
 	},
 	increment(id){
 		console.log('shop.js (+)', id)
-		handleShoppingCart.cartContents = handleShoppingCart.cartContents.map(item=>{
-			if(item.id === id) return item.qty = item.qty++;
-			return item;
-	  	});
-	  handleShoppingCart.getItemCategory();
+		handleShoppingCart.cartContents = handleShoppingCart.cartContents.map(item => {
+			if(item.EAN === id){
+				item.qty = item.qty + 1
+				console.log(item)
+			}
+			return item
+		})
+		console.log('new cont', handleShoppingCart.cartContents)
+		handleShoppingCart.getItemCategory();
+		// if(item.EAN === id)
+		// 		item.qty = item.qty++;
+		// 		console.log('new item value', item)
+      //       return item;
 	},
 	decrement(id){
 		console.log('shop.js (-)', id)
 		handleShoppingCart.cartContents = handleShoppingCart.cartContents.map(item=>{
-			if(item.id === id) return item.qty = item.qty--;
+			if(item.EAN === id) return item.qty = item.qty--;
 			return item;
 		});
 		handleShoppingCart.cartContents.forEach(async item=>{

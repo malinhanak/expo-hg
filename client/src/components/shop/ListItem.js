@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Avatar from '@material-ui/core/Avatar';
 import ImageIcon from '@material-ui/icons/Image';
-import ButtonMenu from './ButtonMenu'
+// import ButtonMenu from './ButtonMenu'
 import { getItemCategory } from '../../store'
+
+const styles = theme => ({
+	firstCell: {
+		padding: '10p'
+	},
+	cell: {
+	  padding: '10px'
+	},
+ });
 
 class WebShop extends Component {
   render() {
+		const { classes } = this.props;
     	const items = this.props.list.map((item) => {
       return (
         	<TableRow key={item.id}>
-         	<TableCell style={{width: '45px', paddingRight: '10px'}}>
+         	<TableCell className={classes.firstCell} style={{width: '45px'}}>
 					<Avatar style={{marginRight: '5px'}}><ImageIcon /></Avatar>
           	</TableCell>
-				 <TableCell style={{paddingLeft: '5px'}}>
+				 <TableCell className={classes.cell}>
 					<div style={{display:'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
 					<h3 style={{margin: '0 0 6px 0'}}>{item.name}</h3>
 					Item id {item.id}
 					</div>
           	</TableCell>
-				<TableCell align="left">{item.color}</TableCell>
-				<TableCell align="center">{item.quantity}</TableCell>
-				<TableCell align="center">{item.prize}</TableCell>
-				<TableCell align="center">{getItemCategory(item)}</TableCell>
-				<TableCell align="right">
-					<ButtonMenu id={item.id} />
+				<TableCell className={classes.cell} align="left">{item.color}</TableCell>
+				<TableCell className={classes.cell} align="center">{item.quantity}</TableCell>
+				<TableCell className={classes.cell} align="center">{item.prize}</TableCell>
+				<TableCell className={classes.cell} align="center">{getItemCategory(item)}</TableCell>
+				<TableCell className={classes.cell} align="right">
+					<button>Köp</button>
 				</TableCell>
        	</TableRow>
       )
@@ -34,4 +45,4 @@ class WebShop extends Component {
   }
 }
 
-export default WebShop;
+export default withStyles(styles)(WebShop);

@@ -20,7 +20,7 @@ class ShopTable extends Component {
 						<TableCell align="center">Lagersaldo</TableCell>
 						<TableCell align="center">Pris</TableCell>
 						<TableCell align="center">Kategori</TableCell>
-						<TableCell align="right">buttons</TableCell>
+						<TableCell align="right"/>
 					</TableRow>
 				</TableHead>
 				<TableBody>

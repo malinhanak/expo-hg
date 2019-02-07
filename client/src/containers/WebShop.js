@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ShopTable from '../components/shop/ShopTable'
 import Category from '../components/shop/Category'
 import connect from '../HOC/connect';
+import Cart from '../components/shop/Cart';
+import CartHead from '../components/shop/CartHead';
 
 class WebShop extends Component {
 	state = {
@@ -19,13 +21,17 @@ class WebShop extends Component {
   	render() {
     	return (
 			<div className="content-box">
-				<h3 className="title cat-title">Kategorier</h3>
-				<Category class={'cat-1'} title={'Hästar'} cat={'HORSE'} sort={this.handleStateCategory} />
-				<Category class={'cat-2'} title={'Hästutrustning'} cat={'HORSE_GEAR'} sort={this.handleStateCategory} />
-				<Category class={'cat-3'} title={'Ryttareutrustning'} cat={'RIDER_GEAR'} sort={this.handleStateCategory} />
-				<Category class={'cat-4'} title={'Övrigt'} cat={'MISC'} sort={this.handleStateCategory} />
-				<Category class={'cat-5'} title={'Okategoriserat'} sort={this.resetStore} />
-				<h3 className="title shop-title">Webshop</h3>
+				<CartHead qty={this.props.qty}/>
+				<Cart cart={this.props.cart} />
+				<div className="shop-categories">
+					<h3>Kategorier:</h3>
+					<Category class={'cat-1'} title={'Hästar'} cat={'HORSE'} sort={this.handleStateCategory} />
+					<Category class={'cat-2'} title={'Hästutrustning'} cat={'HORSE_GEAR'} sort={this.handleStateCategory} />
+					<Category class={'cat-3'} title={'Ryttareutrustning'} cat={'RIDER_GEAR'} sort={this.handleStateCategory} />
+					<Category class={'cat-4'} title={'Övrigt'} cat={'MISC'} sort={this.handleStateCategory} />
+					<Category class={'cat-5'} title={'Okategoriserat'} cat={''} sort={this.resetStore} />
+				</div>
+				
 				<ShopTable payload={this.sortItemByCategory(this.props.data)}  />
 			</div>
     	);

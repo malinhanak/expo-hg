@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Edit from '../buttons/Edit';
+import { handleShoppingCart } from '../../store'
+// import Edit from '../buttons/Edit';
 
-const alertTest = (id, text) => {
-  return alert(`you clicked id ${id}, to ${text}`)
-}
 
-const ButtonMenu = (props) => {
-  return (
-    <>
-      <button className="button-menu add" onClick={() => {alertTest(props.id, 'add to cart')}}>
-        <FontAwesomeIcon icon="plus" />
-      </button>
-      <Edit id={props.id} />
-      <button className="button-menu delete" onClick={() => {alertTest(props.id, 'delete')}}>
-        <FontAwesomeIcon icon="trash" />
-      </button>
-    </>
-  )
+class ButtonMenu extends Component {
+  	incrementCount = (id) => {
+		console.log(id)
+		return handleShoppingCart.increment(id)
+	}
+	decrementCount = (id) => {
+		console.log(id)
+		return handleShoppingCart.decrement(id)
+	}
+  	render() {
+		return (
+			<div className="button-menu">
+				<button className="add" onClick={() => this.incrementCount(this.props.id)}>
+					<FontAwesomeIcon icon="plus" />
+				</button>
+				{/* <Edit id={props.id} /> */}
+				<input type="text" className="item-amount" value={this.props.qty} readOnly/>
+				<button className="subtract" onClick={() => this.decrement(this.props.id)}>
+					<FontAwesomeIcon icon="minus" />
+				</button>
+			</div>
+		)
+  }  
 }
 
 export default ButtonMenu
