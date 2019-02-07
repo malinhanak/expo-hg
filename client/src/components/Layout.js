@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from './Navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { withRouter } from "react-router";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Home extends Component {
   render() {
@@ -25,4 +26,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
