@@ -19,10 +19,16 @@ class WebShop extends Component {
 	})
 	
   	render() {
+		  const {data, user} = this.props
+		  if (!data && !user) {
+			  return null;
+		  }
+		  const calculateQty = user ? user.cart.reduce((a, b) => { return a + b.qty }, 0) : 0;
+		  const userCart = user ? user.cart: ''
     	return (
 			<div className="content-box">
-				<CartHead qty={this.props.qty}/>
-				<Cart cart={this.props.cart} />
+				<CartHead qty={calculateQty}/>
+				<Cart cart={userCart} />
 				<div className="shop-categories">
 					<h3>Kategorier:</h3>
 					<Category class={'cat-1'} title={'Hästar'} cat={'HORSE'} sort={this.handleStateCategory} />
@@ -32,7 +38,7 @@ class WebShop extends Component {
 					<Category class={'cat-5'} title={'Okategoriserat'} cat={''} sort={this.resetStore} />
 				</div>
 				
-				<ShopTable payload={this.sortItemByCategory(this.props.data)}  />
+				<ShopTable payload={this.sortItemByCategory(data)}  />
 			</div>
     	);
   	}
