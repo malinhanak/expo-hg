@@ -26,14 +26,16 @@ export const typeDefs = gql`
     #stableId: String
     #horses: Int
     inventory: [Iventory]
+    cart: [Cart]
     coin: Int
   }
 
   type Iventory {
-    EAN: ID
+    id: ID!
+    EAN: String
     name: String
     category: ItemCategory
-    quantity: Int
+    qty: Int
   }
 
   type credentials {
@@ -43,10 +45,25 @@ export const typeDefs = gql`
   }
 
   input IventoryInput {
-    EAN: ID
+    id: ID!
+    EAN: String
     name: String
     category: ItemCategory
-    quantity: Int
+    qty: Int
+  }
+
+  type Cart {
+    EAN: String
+    name: String
+    price: Int
+    qty: Int
+  }
+
+  input CartInput {
+    EAN: String
+    name: String
+    price: Int
+    qty: Int
   }
 
   type Query {
@@ -55,6 +72,7 @@ export const typeDefs = gql`
     findUser(id: ID!): User
     findItem(id: ID): Item
     searchForItem(category: String, name: String): [Item]
+    findCart: Cart
   }
 
   type Mutation {
@@ -62,6 +80,9 @@ export const typeDefs = gql`
     updateItem(id: ID!, EAN: String name: String, description: String, color: String quantity: Int, prize: Int, category: ItemCategory): Item
     createUser(fullName: String!, email: String!, inventory: [IventoryInput], coin: Int): User
     updateUserInventory(id: ID!, inventory: [IventoryInput]): User
+    incrementUserCartItem(id: ID!, cart: CartInput!): User
+    decrementUserCartItem(id: ID!, cart: CartInput!): User
+    addUserCartItem(id: ID!, cart: CartInput!): User
     deleteUser(id: ID!): User
     deleteItem(id: ID!): Item
   }
@@ -70,6 +91,7 @@ export const typeDefs = gql`
     itemUpdated: Item
     itemCreated: Item
     itemDeleted: Item
+    userUpdated: User
   }
 
 `;

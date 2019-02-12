@@ -1,4 +1,4 @@
-import { itemModel, userModel }  from './model';
+import { itemModel, userModel, cartModel }  from './model';
 import pubsub, { EVENTS } from './subscriptions';
 
 export const resolvers = {
@@ -11,6 +11,9 @@ export const resolvers = {
     },
     itemDeleted: {
       subscribe: () => pubsub.asyncIterator(EVENTS.ITEM.DELETED)
+    },
+    userUpdated: {
+      subscribe: () => pubsub.asyncIterator(EVENTS.USER.UPDATED),
     },
   },
   Query: {
@@ -28,7 +31,7 @@ export const resolvers = {
     },
     searchForItem: async (source, {category, name}) => {
       return await itemModel.search(category, name)
-    }
+    },
   },
   Mutation: {
     createItem: async (source, args) => {
@@ -49,6 +52,24 @@ export const resolvers = {
     updateUserInventory: async (source, args) => {
       return await userModel.updateInventory(args.id, args)
     },
+    incrementUserCartItem: async (source, args) => {
+      const userCart = await userModel.incrementCartItem(args.id, args.cart.EAN, args)
+      pubsub.publish(EVENTS.USER.UPDATED, { 
+        userUpdated: userCart });
+      return userCart
+    },
+    decrementUserCartItem: async (source, args) => {
+      const userCart = await userModel.decrementCartItem(args.id, args.cart.EAN, args)
+      pubsub.publish(EVENTS.USER.UPDATED, { 
+        userUpdated: userCart });
+      return userCart
+    },
+    addUserCartItem: async (source, args) => {
+      const userCart = await userModel.addCartItem(args.id, args.cart.EAN, args)
+      pubsub.publish(EVENTS.USER.UPDATED, { 
+        userUpdated: userCart });
+      return userCart
+    },
     deleteUser: async (source, { id }) => {
       return await userModel.delete(id)
     },
@@ -64,5 +85,5 @@ export const resolvers = {
         throw new Error('Horrible error - run, run!!')
       })
     }
-  }
+  },
 };
