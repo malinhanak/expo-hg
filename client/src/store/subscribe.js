@@ -1,10 +1,20 @@
 export const subscribeToItemCreatedAndUpdated = (subscription) => {
   return (prev, { subscriptionData }) => {
-    if (!subscriptionData.data) return prev;
     const nextItem = subscriptionData.data[subscription];
+    if (!subscriptionData.data || !nextItem) return prev;
     const prevItem = prev.getItems.filter((item) => item.id !== nextItem.id)
       return Object.assign({}, prev, {
-        getItems: [nextItem, ...prevItem]
+        getItems: [nextItem, ...prevItem],
+    });
+  }
+}
+
+export const subscribeToUserChanges = () => {
+  return (prev, { subscriptionData }) => {
+    if (!subscriptionData.data) return prev;
+    const prevUser = prev.findUser
+      return Object.assign({}, prev, {
+        findUser: prevUser,
     });
   }
 }
