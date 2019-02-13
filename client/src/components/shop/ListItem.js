@@ -4,8 +4,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Avatar from '@material-ui/core/Avatar';
 import ImageIcon from '@material-ui/icons/Image';
-// import ButtonMenu from './ButtonMenu'
+import { client } from '../../store';
 import { getItemCategory } from '../../store'
+import { ADD_CART_ITEM } from '../../graphql/mutations'
+import { GET_WEBSHOP_DATA } from '../../graphql/queries';
 
 const styles = theme => ({
 	firstCell: {
@@ -17,6 +19,17 @@ const styles = theme => ({
  });
 
 class WebShop extends Component {
+	addToCart = (EAN, name, price) => {
+		console.log('params', EAN, name, price)
+		const payload = { EAN, name, price, qty: 1 }
+		client.mutate({
+			variables: { id: 1, cart: payload },
+			mutation: ADD_CART_ITEM,
+			refetchQueries: [{ query: GET_WEBSHOP_DATA }]
+	  })
+	  .then(result => result)
+	  .catch(error => { console.log(error) });
+	}
   render() {
 		const { classes } = this.props;
     	const items = this.props.list.map((item) => {
@@ -28,7 +41,7 @@ class WebShop extends Component {
 				 <TableCell className={classes.cell}>
 					<div style={{display:'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
 					<h3 style={{margin: '0 0 6px 0'}}>{item.name}</h3>
-					Item id {item.id}
+					Item id {item.id}, Item EAN {item.EAN}
 					</div>
           	</TableCell>
 				<TableCell className={classes.cell} align="left">{item.color}</TableCell>
@@ -36,7 +49,7 @@ class WebShop extends Component {
 				<TableCell className={classes.cell} align="center">{item.prize}</TableCell>
 				<TableCell className={classes.cell} align="center">{getItemCategory(item)}</TableCell>
 				<TableCell className={classes.cell} align="right">
-					<button>Köp</button>
+					<button onClick={() => this.addToCart(item.EAN, item.name, item.prize)}>Lägg till</button>
 				</TableCell>
        	</TableRow>
       )

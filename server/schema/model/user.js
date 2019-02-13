@@ -46,19 +46,28 @@ class User {
 			.then(res => res.data)
 		})
 	}
+	/***
+	 * Adds a item to cart,
+	 * 
+	 * Adds a new item to cart - modified data-parameter with new object.
+	 * 
+	 * @param id - id of item
+	 * @param ean - ...
+	 * @param data - ...
+	 * 
+	 * @returns Promise resolved with patched cart.
+	 */
+	// Patches data-parameter and adds a new item to cart.
 	addCartItem(id, EAN, data) {
 		return this.findItem(id, EAN)
 		.then((res) => {
-			let aData = data
-			if(res.length == 0){
+			if (res.length === 0) {
 				return this.api.get(`/users/${id}`)
 				.then((articles) => {
-				let cart = articles.data.cart;
-				cart = [...cart, data.cart]
-				data.cart = cart
-				return this.api.patch(`/users/${id}`, data)
-				.then(res => res.data)
+					data.cart = [...articles.data.cart, data.cart]
+					return this.api.patch(`/users/${id}`, data)
 				})
+				.then(res => res.data)
 			} else {
 				return this.incrementCartItem(id, EAN, data)
 			}
@@ -79,11 +88,14 @@ class User {
 	decrementCartItem(id, itemId, data) {
 		return this.api.get(`/users/${id}`)
 		.then((items) => {
-			items.data.cart.filter(item => item.EAN === itemId).map(item => {
-			item.qty = item.qty -1
-			return item
-			})
+			items.data.cart.filter(item => item.EAN === itemId).forEach(item => {
+				// Updating internal key in object.
+				item.qty = item.qty -1
+			});
+			
 			items.data.cart = items.data.cart.filter((item) => item.qty >= 1)
+
+			// Reassigning data-parameter with result. 
 			data = items.data
 			return this.api.patch(`/users/${id}`, data)
 			.then(res => res.data)
