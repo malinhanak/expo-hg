@@ -46,18 +46,17 @@ class User {
 			.then(res => res.data)
 		})
 	}
-	/***
+	/*
 	 * Adds a item to cart,
 	 * 
 	 * Adds a new item to cart - modified data-parameter with new object.
 	 * 
-	 * @param id - id of item
-	 * @param ean - ...
-	 * @param data - ...
+	 * @param id - id of user
+	 * @param ean - id of item
+	 * @param data - complete data object passed from the resolvers.
 	 * 
 	 * @returns Promise resolved with patched cart.
 	 */
-	// Patches data-parameter and adds a new item to cart.
 	addCartItem(id, EAN, data) {
 		return this.findItem(id, EAN)
 		.then((res) => {
@@ -77,8 +76,8 @@ class User {
 		return this.api.get(`/users/${id}`)
 		.then((items) => {
 			items.data.cart.filter(item => item.EAN === itemId).map(item => {
-			item.qty = item.qty +1
-			return item
+				item.qty = item.qty +1
+				return item
 			})
 			data = items.data
 			return this.api.patch(`/users/${id}`, data)
