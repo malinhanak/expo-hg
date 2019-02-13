@@ -13,8 +13,6 @@ function connect(WrappedComponent) {
 						if (loading) return "Loading...";
 						if (error) return `Error! ${error.message}`;
 
-						console.log('HOC DATA', data)
-	
 						subscribeToMore({
 						document: SUBSCRIBE_ITEM_CREATED,
 						updateQuery: subscribeToItemCreatedAndUpdated('itemCreated')
