@@ -86,10 +86,13 @@ $font-stack-content: 'Open Sans', sans-serif;
     grid-row: 2 / 4;
 
     .content-box {
+      height:100%;
       @include display-grid;
       grid-template-columns: auto repeat(12, 1fr);
       grid-template-rows: 3rem auto 2rem;
       grid-gap: 20px;
+      align-items: stretch;
+      justify-items: stretch;
       background-color: white;
       font: normal 400 11px/100% $font-stack-content;
 
@@ -301,6 +304,7 @@ $font-stack-content: 'Open Sans', sans-serif;
   grid-row: 4;
   align-items: stretch;
   background-color: #e5e5e5;
+  padding: 15px 15px;
 
   div {
     width:100%;
