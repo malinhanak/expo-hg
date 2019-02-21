@@ -24,11 +24,12 @@ class WebShop extends Component {
 			  return null;
 		  }
 		  const calculateQty = user ? user.cart.reduce((a, b) => { return a + b.qty }, 0) : 0;
+		  const calculatePrice = user ? user.cart.reduce((a, b) => { return a + b.price }, 0) : 0;
 		  const userCart = user ? user.cart: ''
     	return (
 			<div className="content-box">
 				<CartHead qty={calculateQty}/>
-				<Cart cart={userCart} />
+				<Cart cart={userCart} total={calculatePrice} />
 				<div className="shop-categories">
 					<h3>Kategorier:</h3>
 					<Category class={'cat-1'} title={'Hästar'} cat={'HORSE'} sort={this.handleStateCategory} />
