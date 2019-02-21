@@ -20,7 +20,6 @@ const styles = theme => ({
 
 class WebShop extends Component {
 	addToCart = (EAN, name, price) => {
-		console.log('params', EAN, name, price)
 		const payload = { EAN, name, price, qty: 1 }
 		client.mutate({
 			variables: { id: 1, cart: payload },
