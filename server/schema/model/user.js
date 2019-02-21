@@ -72,17 +72,17 @@ class User {
 			}
 		})
 	}
-	incrementCartItem(id, itemId, data) {
+	incrementCartItem(id, EAN, data) {
 		return this.api.get(`/users/${id}`)
 		.then((items) => {
-			items.data.cart.filter(item => item.EAN === itemId).map(item => {
+			items.data.cart.filter(item => item.EAN === EAN).map(item => {
 				item.qty = item.qty +1
 				return item
 			})
 			data = items.data
 			return this.api.patch(`/users/${id}`, data)
-			.then(res => res.data)
 		})
+		.then(res => res.data)
 	}
 	decrementCartItem(id, itemId, data) {
 		return this.api.get(`/users/${id}`)

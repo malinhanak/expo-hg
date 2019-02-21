@@ -8,4 +8,7 @@ export const EVENTS = {
   USER: USER_EVENTS
 };
 
-export default new PubSub();
+const pubsub = new PubSub()
+pubsub.ee.setMaxListeners(90);
+
+export default pubsub;
