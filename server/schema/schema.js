@@ -56,6 +56,7 @@ export const typeDefs = gql`
     EAN: String
     name: String
     price: Int
+    total: Int
     qty: Int
   }
 
@@ -63,6 +64,7 @@ export const typeDefs = gql`
     EAN: String
     name: String
     price: Int
+    total: Int
     qty: Int
   }
 

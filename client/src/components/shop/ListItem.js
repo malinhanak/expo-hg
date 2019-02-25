@@ -17,7 +17,7 @@ const styles = () => ({
 
 class WebShop extends Component {
 	addToCart = (EAN, name, price) => {
-		const payload = { EAN, name, price, qty: 1 }
+		const payload = { EAN, name, price, total: price, qty: 1 }
 		client.mutate({
 			variables: { id: 1, cart: payload },
 			mutation: ADD_CART_ITEM,

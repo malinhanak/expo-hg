@@ -77,6 +77,7 @@ class User {
 		.then((items) => {
 			items.data.cart.filter(item => item.EAN === EAN).map(item => {
 				item.qty = item.qty +1
+				item.total = item.total + item.price
 				return item
 			})
 			data = items.data
@@ -90,6 +91,7 @@ class User {
 			items.data.cart.filter(item => item.EAN === itemId).forEach(item => {
 				// Updating internal key in object.
 				item.qty = item.qty -1
+				item.total = item.total - item.price
 			});
 			
 			items.data.cart = items.data.cart.filter((item) => item.qty >= 1)

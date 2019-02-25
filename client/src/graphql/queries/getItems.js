@@ -24,8 +24,10 @@ const GET_WEBSHOP_DATA = gql`
         EAN
         name
         price
+        total
         qty
       }
+      coin
     }
   }
 `;
