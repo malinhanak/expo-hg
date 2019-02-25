@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHome, faAngleDown, faUser, faEnvelope, faCog, faDollarSign, faPen, faTrash, faPlus, faMinus, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faAngleDown, faUser, faEnvelope, faCog, faDollarSign, faPen, faTrash, faPlus, faMinus, faShoppingCart, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default library.add(
   faHome, 
@@ -12,5 +12,6 @@ export default library.add(
   faTrash,
   faPlus,
   faMinus,
-  faShoppingCart
+  faShoppingCart,
+  faCartPlus
 )

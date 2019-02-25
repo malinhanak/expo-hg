@@ -4,6 +4,7 @@ import Category from '../components/shop/Category'
 import connect from '../HOC/connect';
 import Cart from '../components/shop/Cart';
 import CartHead from '../components/shop/CartHead';
+import CartCheckout from '../components/shop/CartCheckout';
 
 class WebShop extends Component {
 	state = {
@@ -30,6 +31,7 @@ class WebShop extends Component {
 			<div className="content-box">
 				<CartHead qty={calculateQty}/>
 				<Cart cart={userCart} total={calculatePrice} />
+				<CartCheckout total={calculatePrice}/>
 				<div className="shop-categories">
 					<h3>Kategorier:</h3>
 					<Category class={'cat-1'} title={'Hästar'} cat={'HORSE'} sort={this.handleStateCategory} />

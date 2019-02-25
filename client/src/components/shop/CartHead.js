@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Cart extends Component {
+class CartHead extends Component {
   	render() {
 		return (
          <div className="shopping-cart-head">
@@ -10,4 +10,4 @@ class Cart extends Component {
   }  
 }
 
-export default Cart
+export default CartHead
